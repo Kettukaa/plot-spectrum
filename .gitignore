@@ -1,0 +1,5 @@
+data/
+_old/
+.vscode/
+.DS_Store
+.idea/

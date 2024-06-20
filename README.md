@@ -1,10 +1,11 @@
 # Visualize Spectrum
 I wanted a tool similar to Audacity's `Analyze>Plot Spectrum` option that I could automate better and create nicer looking graphs.
 
+![assets/example.png](assets/example.png)
 
 ## Example Use
 ```py
-file_pairs = [
+file_tuples = [
     (
         Path("data/original.wav"),
         Path("data/change_1.wav"),
@@ -17,7 +18,7 @@ major_ticks = [100, 1000, 10000]
 nfft = 2**11
 fig_size = (11.69 * 1.5, 8.27)
 generate_spectrums(
-    file_pairs,
+    file_tuples,
     output_dir=output_dir,
     legend_labels=legend_labels,
     major_ticks=major_ticks,

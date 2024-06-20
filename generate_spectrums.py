@@ -89,7 +89,7 @@ def convert_ticks_to_labels(ticks: List[int]) -> List[str]:
 
 
 def generate_spectrums(
-    file_pairs: List[Tuple[Path, ...]],
+    file_groups: List[Tuple[Path, ...]],
     output_dir: Path = Path("output_files"),
     theme: Flavor = PALETTE.mocha,
     window: str = "hann",
@@ -100,10 +100,10 @@ def generate_spectrums(
     legend_labels: Optional[List[str]] = None,
 ) -> None:
     """
-    Generate and save frequency spectrums for given audio file pairs.
+    Generate and save frequency spectrums for given audio file groups.
 
     Parameters:
-    file_pairs (List[Tuple[Path, ...]]): List of tuples containing paths to audio files.
+    file_groups (List[Tuple[Path, ...]]): List of tuples containing paths to audio files.
     output_dir (Path): Directory to save the output images.
     theme (Flavor): Theme for the plots.
     window (str): Type of window to use for the FFT.
@@ -124,7 +124,7 @@ def generate_spectrums(
 
     output_dir.mkdir(parents=True, exist_ok=True)
 
-    for file_tuple in file_pairs:
+    for file_tuple in file_groups:
         plt.figure(figsize=fig_size)
 
         for i, audio_file in enumerate(file_tuple):
@@ -186,7 +186,7 @@ def generate_spectrums(
 
 # Example usage
 if __name__ == "__main__":
-    file_pairs = [
+    file_groups = [
         (
             Path("data/original.wav"),
             Path("data/change_1.wav"),
@@ -199,7 +199,7 @@ if __name__ == "__main__":
     nfft = 2**11
     fig_size = (11.69 * 1.5, 8.27)
     generate_spectrums(
-        file_pairs,
+        file_groups,
         output_dir=output_dir,
         legend_labels=legend_labels,
         major_ticks=major_ticks,

@@ -1,5 +1,10 @@
+__pycache__/
+
 data/
 _old/
 .vscode/
 .DS_Store
 .idea/
+
+
+run_spectrums.py

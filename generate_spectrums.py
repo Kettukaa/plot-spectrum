@@ -188,14 +188,17 @@ if __name__ == "__main__":
             Path("data/change_2.wav"),
         )
     ]
+    output_dir = Path("data/output_images/")
     legend_labels = ["Original", "Change 1", "Change 2"]
     major_ticks = [100, 1000, 10000]
+    nfft = 2**11
+    fig_size = (11.69 * 1.5, 8.27)
     generate_spectrums(
         file_pairs,
-        output_dir=Path("data/output_images/"),
+        output_dir=output_dir,
         legend_labels=legend_labels,
         major_ticks=major_ticks,
         window="hann",
-        nfft=2**11,
-        fig_size=(11.69 * 1.5, 8.27),
+        nfft=nfft,
+        fig_size=fig_size,
     )

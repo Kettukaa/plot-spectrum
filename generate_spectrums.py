@@ -95,6 +95,7 @@ def generate_spectrums(
     window: str = "hann",
     nfft: int = 1024,
     fig_size: Tuple[float, float] = (11.69, 8.27),
+    name_stem: Optional[str] = None,
     major_ticks: Optional[List[int]] = None,
     legend_labels: Optional[List[str]] = None,
 ) -> None:
@@ -152,7 +153,12 @@ def generate_spectrums(
         plt.xlim(47, 24000)
         plt.xlabel("Frequency [Hz]")
         plt.ylabel("Amplitude [dB]")
-        plt.title(f"{Path(file_tuple[0]).stem} Frequency Spectrum")
+        if name_stem:
+            output_path = output_dir / f"{name_stem}.png"
+            plt.title(f"{name_stem} Frequency Spectrum")
+        else:
+            output_path = output_dir / f"{Path(file_tuple[0]).stem}_combined.png"
+            plt.title(f"{Path(file_tuple[0]).stem} Frequency Spectrum")
         plt.legend()
 
         plt.grid(True, which="both", axis="both", color=theme.colors.overlay1.hex)
@@ -174,7 +180,6 @@ def generate_spectrums(
             major_labels = convert_ticks_to_labels(major_ticks)
             plt.xticks(major_ticks, major_labels)
 
-        output_path = output_dir / f"{Path(file_tuple[0]).stem}_combined.png"
         plt.savefig(output_path, bbox_inches="tight", pad_inches=0.1, dpi=600)
         plt.close()
 
@@ -201,4 +206,5 @@ if __name__ == "__main__":
         window="hann",
         nfft=nfft,
         fig_size=fig_size,
+        name_stem="Example"
     )

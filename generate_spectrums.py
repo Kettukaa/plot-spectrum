@@ -32,7 +32,7 @@ def create_spectrum(
     """
     sample_rate, data = wav.read(audio_file)
     if len(data.shape) > 1:
-        data = data[:, 0]  # Use the first channel if stereo
+        data = np.mean(data, axis=1)
     data = data / np.max(np.abs(data))  # Normalize data
     f, power = signal.welch(
         data,
@@ -91,7 +91,7 @@ def convert_ticks_to_labels(ticks: List[int]) -> List[str]:
 def generate_spectrums(
     file_pairs: List[Tuple[Path, ...]],
     output_dir: Path = Path("output_files"),
-    theme: Flavor = PALETTE.latte,
+    theme: Flavor = PALETTE.mocha,
     window: str = "hann",
     nfft: int = 1024,
     fig_size: Tuple[float, float] = (11.69, 8.27),
